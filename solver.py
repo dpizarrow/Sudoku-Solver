@@ -18,24 +18,28 @@ def solve(board):
     return False
 
 def valid(board, pos, num):
+    # check row
     for i in range(0, len(board)):
         if board[pos[0]][i] == num and pos[1] != i:
             return False
     
+    # check column
     for i in range(0, len(board)):
         if board[i][pos[1]] == num and pos[0] != i:
             return False
     
-    box_x = pos[1] // 3
-    box_y = pos[0] // 3
+    # check each 3x3 cell
+    cell_x = pos[1] // 3
+    cell_y = pos[0] // 3
 
-    for i in range(3 * (box_y), 3 + (3*box_y)):
-        for j in range(3 * (box_x), 3 + (3*box_x)):
+    for i in range(3 * (cell_y), 3 + (3*cell_y)):
+        for j in range(3 * (cell_x), 3 + (3*cell_x)):
             if board[i][j] == num and (i, j) != pos:
                 return False
     
     return True
 
+# finds empty square on the board
 def findEmpty(board):
     for i in range(len(board)):
         for j in range(len(board[0])):
@@ -45,6 +49,7 @@ def findEmpty(board):
     return
 
 
+# utility function to print the board
 def printBoard(board):
     for i in range(len(board)):
         if i % 3 == 0 and i != 0:
@@ -59,7 +64,7 @@ def printBoard(board):
             else:
                 print(str(board[i][j]) + " ", end = "")
 
-b = [
+b1 = [
     [5, 1, 7, 6, 0, 0, 0, 3, 4],
     [2, 8, 9, 0, 0, 4, 0, 0, 0],
     [3, 4, 6, 2, 0, 5, 0, 9, 0],
@@ -97,6 +102,16 @@ b3 = [
 
 
 pp = pprint.PrettyPrinter(width=41, compact=True)
+
+solve(b1)
+pp.pprint(b1)
+
+print()
+
+solve(b2)
+pp.pprint(b2)
+
+print()
+
 solve(b3)
 pp.pprint(b3)
-
